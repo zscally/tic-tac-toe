@@ -1,10 +1,9 @@
 <?php
 return [
     'settings' => [
-        'env' => 'test', //test / prod
-        'displayErrorDetails' => false, // set to false in production
+        'env' => 'dev', //dev //test //prod
+        'displayErrorDetails' => True, // set to false in production
         'system' => [
-            'env' => 'dev', //dev, prod, test
             'domain' => 'http://localhost:8000/',
             'tiny_key' => 'gvXbPf8JuntCzwFBW65jrONZRDmh4AdLk29x0HclsMy1eVKI3pYGUEiSqTao7Q'
         ],
