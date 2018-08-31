@@ -21,8 +21,10 @@ class HomeController extends Controller
     {
         if( $request->getAttribute('has_errors') )
         {
-          $this->flash->addMEssage('error', $request->getAttribute('errors'));
-          return $response->withRedirect('/');
+            $this->flash->addMEssage('error', $request->getAttribute('errors'));
+            return $response->withRedirect('/');
+        }
+
             //start new Game
 
             //setup unique game ID
@@ -30,8 +32,6 @@ class HomeController extends Controller
             //save players and game into DB
 
             //move them to the playing page.
-        } else {
 
-        }
     }
 }
