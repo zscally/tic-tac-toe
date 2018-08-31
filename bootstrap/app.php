@@ -21,12 +21,14 @@ $container['view'] = function ($container) {
         $container->request->getUri()
     ));
 
+    $view->addExtension(new Twig_Extension_Debug());
+
     return $view;
 };
 
-$container['db'] = function ($c) {
+$container['db'] = function ($container) {
     $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($c['settings']['db']);
+    $capsule->addConnection($container['settings']['db']);
 
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
@@ -34,8 +36,8 @@ $container['db'] = function ($c) {
     return $capsule;
 };
 
-$container['logger'] = function ($c) {
-    $settings = $c->get('settings')['logger'];
+$container['logger'] = function ($container) {
+    $settings = $container->get('settings')['logger'];
     $logger = new Monolog\Logger($settings['name']);
     $logger->pushProcessor(new Monolog\Processor\UidProcessor());
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
@@ -46,27 +48,23 @@ $container['session'] = function(){
     return new \SlimSession\Helper;
 };
 
-$container['flash'] = function ($c) {
+$container['flash'] = function ($container) {
     return new \Slim\Flash\Messages();
 };
 
-$container['tiny'] = function ($c) {
-    $settings = $c->get('settings')['system'];
+$container['tiny'] = function ($container) {
+    $settings = $container->get('settings')['system'];
     return new \ZackKitzmiller\Tiny($settings['tiny_key']);
 };
 
-$controllers = ['HomeController'];
+$controllers = ['HomeController', 'TicTacToeController'];
 
 foreach($controllers as $controller) {
-    $container[$controller] = function($c) use ($controller) {
+    $container[$controller] = function($container) use ($controller) {
         $myController = '\App\Controllers\\' . $controller;
-        return new $myController($c);
+        return new $myController($container);
     };
 }
-
-
-
-
 
 require __DIR__ . '/../App/middleware.php';
 require __DIR__ . '/../App/routes.php';
