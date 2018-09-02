@@ -1,7 +1,7 @@
 <?php
 return [
     'settings' => [
-        'env' => 'dev', //dev //test //prod
+        'env' => 'dev',
         'displayErrorDetails' => True, // set to false in production
         'system' => [
             'domain' => 'http://localhost:8000/',
@@ -19,8 +19,8 @@ return [
             'driver' => 'mysql',
             'host' => 'localhost',
             'database' => 'tictactoe',
-            'username' => 'zscally',
-            'password' => '',
+            'username' => 'tictactoe',
+            'password' => 'idonthaveone',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',

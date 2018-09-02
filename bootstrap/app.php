@@ -26,13 +26,12 @@ $container['view'] = function ($container) {
     return $view;
 };
 
-$container['db'] = function ($container) {
-    $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($container['settings']['db']);
+$capsule = new \Illuminate\Database\Capsule\Manager;
+$capsule->addConnection($container['settings']['db']);
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 
-    $capsule->setAsGlobal();
-    $capsule->bootEloquent();
-
+$container['db'] = function ($container) use ($capsule) {
     return $capsule;
 };
 
@@ -57,7 +56,7 @@ $container['tiny'] = function ($container) {
     return new \ZackKitzmiller\Tiny($settings['tiny_key']);
 };
 
-$controllers = ['HomeController', 'TicTacToeController'];
+$controllers = ['HomeController', 'SessionController', 'GameController', 'PlayerController'];
 
 foreach($controllers as $controller) {
     $container[$controller] = function($container) use ($controller) {

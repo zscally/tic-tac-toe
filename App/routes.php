@@ -20,6 +20,4 @@ $app->post('/startnewgame', 'HomeController:startnewgame')
 * main game board - this will show the game reteaive the current game and let
 * JS take over sending and receiving updates from the ajax calls.
 */
-$app->get('/{game_id}', 'TicTacToeController:index')->setName('gameBoard');
-
-$app->post('/{game_id}/save_turn', 'TicTacToeController:saveTurn')->setName('SaveTurn');
+$app->get('/{session_id}', 'SessionController:index')->setName('gameBoard');
