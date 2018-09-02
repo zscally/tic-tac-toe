@@ -1,3 +1,3 @@
-composer install
 composer dump-autoload
-npm install public/assets/js
+composer install
+cd public/ && npm install
