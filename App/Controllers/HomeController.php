@@ -33,7 +33,7 @@ class HomeController extends Controller
         if( ! empty( $messages ) ) {
             $args['messages'] = $messages;
         }
-        return $this->view->render($response, 'newgame.html', $args);
+        return $this->view->render($response, 'start.html', $args);
     }
 
     /**
