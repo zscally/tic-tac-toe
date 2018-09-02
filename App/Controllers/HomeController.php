@@ -4,12 +4,25 @@ namespace App\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use \Slim\Twig as view;
-use App\Models\Game;
-use App\Models\Session;
-use App\Models\Player;
+use \App\Models\Game;
+use \App\Models\Session;
+use \App\Models\Player;
 
 class HomeController extends Controller
 {
+    public $container, $tiny;
+
+    private $session, $player, $game;
+
+    public function __construct($container)
+    {
+        $this->container = $container;
+        $this->session = new \App\Models\Session();
+        $this->game = new \App\Models\Game();
+        $this->player = new \App\Models\player();
+        $this->tiny = $container->tiny;
+    }
+
     /**
     * Display play for accepting two players and forward them to start a new game.
     */
@@ -34,44 +47,17 @@ class HomeController extends Controller
             $this->flash->addMEssage('error', $request->getAttribute('errors'));
             return $response->withRedirect('/');
         }
-
-        //get post vars
         $post = $request->getParsedBody();
 
-        //start a new session
-        $session = $this->createSession($request);
+        $session_url = $this->tiny->to(time().microtime());
+        $session = $this->session->createSession($request, $session_url);
 
-        //save players
-        $players = $this->createPlayers([$post['playerOne'], $post['playerTwo']]);
+        $players = $this->player->createPlayers([$post['playerOne'], $post['playerTwo']]);
 
-        //start new Game
-        $game = $this->GameController->createGame($session->id, $players);
+        $game = $this->game->createGame($session->id, $players);
 
         $this->flash->addMessage('success', [['Game session has been created!']]);
+
         return $response->withRedirect('/' . $session->session_url, 301);
-    }
-
-    private function createSession($request)
-    {
-        $session_url = $this->tiny->to(time().microtime());
-        $session = Session::create([
-            'session_url' => $session_url,
-            'php_session' => session_id(),
-            'ip_address' => $request->getAttribute('ip_address')
-        ]);
-
-        return $session;
-    }
-
-    private function createPlayers($player_list)
-    {
-        $players = [];
-        foreach( $player_list as $player )
-        {
-            $players[] = Player::create([
-                'player_name' => $player
-            ]);
-        }
-        return $players;
     }
 }
