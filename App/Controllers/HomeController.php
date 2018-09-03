@@ -19,7 +19,7 @@ class HomeController extends Controller
         $this->container = $container;
         $this->session = new \App\Models\Session();
         $this->game = new \App\Models\Game();
-        $this->player = new \App\Models\player();
+        $this->player = new \App\Models\Player();
         $this->tiny = $container->tiny;
     }
 

@@ -1,5 +1,10 @@
 {% include 'messages.html' %}
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+{% if gameboard == true %}
+    <script src="/assets/js/game.js"></script>
+{%endif%}
+
 </body>
 </html>

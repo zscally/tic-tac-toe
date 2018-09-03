@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 class Session extends Model
 {
@@ -16,5 +17,10 @@ class Session extends Model
               'ip_address' => $request->getAttribute('ip_address')
           ]);
           return $session;
+      }
+
+      public function getSessionIdFromUrl($session_url)
+      {
+          return $this->where('session_url', $session_url)->pluck('id')->all();
       }
 }

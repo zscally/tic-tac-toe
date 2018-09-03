@@ -4,12 +4,6 @@ body {
 }
 
 body {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
   background-color: #f5f5f5;
 }
 
@@ -40,4 +34,50 @@ body {
 
 .margin-top-10{
   margin-top: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+td {
+  width: 100px;
+  height: 100px;
+}
+table {
+  margin: 5px auto;
+}
+.vertial-border {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.horizontal-border {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.gameboard{
+    padding:5px;
+}
+
+.bg-white{
+    background-color:#FFF;
+}
+
+.gamesurface{
+    border: 1px solid #ccc;
+}
+
+.gameboard ul.gamesurface li{
+    margin:5px;
+    background-color:#ccc;
+}
+
+.game_stats{
+    margin-bottom:10px;
+}
+
+#gamesurface tr td{
+    text-align: center;
+    font-size: 3em;
+    font-weight: bold;
 }

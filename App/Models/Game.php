@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 class Game extends Model
 {
@@ -24,5 +25,26 @@ class Game extends Model
           ]);
 
           return $game;
+      }
+
+      public function getGamesBySessionId($session_id)
+      {
+          return $this->where('session_id', $session_id)->get();
+      }
+
+      public function getGameById($game_id)
+      {
+          return $this->where('id', $game_id)->first();
+      }
+
+      public function getCurrentGameBySessionId($session_id)
+      {
+          return $this->where('session_id', $session_id)->orderBy('created_at', 'desc')->first();
+      }
+
+      public function updateGameWinnerByGameId($game_id, $winning_player, $status)
+      {
+          return $this->where('id', $game_id)
+                 ->update(['winner' => $winning_player, 'status' => $status]);
       }
 }

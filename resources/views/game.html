@@ -1,3 +1,69 @@
 {% include 'header.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center card-title">Total Games Played {{total_games_played}}</h1>
+        </div>
+    </div>
 
+    <div class="row game_stats">
+        <div class="col-4">
+            <div class="card">
+              <div class="card-body player_one" data-player-id="{{player_one.player_id}}">
+                <h1 class="card-title">Player One "X"</h1>
+                <h3 id="player_one_name" class="text-center" data-player-id="{{player_one.player_id}}">{{player_one.name}}</h3>
+                <h4 id="player_one_score" class="text-center">( {{player_one.score}} ) wins<h4>
+              </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+              <div class="card-body">
+                <h1 class="text-center card-title">Tie Count</h1>
+                <h3 class="text-center">( {{tiecount}} )</h3>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card">
+              <div class="card-body player_two" data-player-id="{{player_two.player_id}}">
+                <h1 class="card-title">Player Two "O"</h2>
+                <h3 id="player_two_name" class="text-center" data-player-id="{{player_two.player_id}}">{{player_two.name}}</h3>
+                <h4 id="player_two_score" class="text-center">( {{player_two.score}} ) wins</h4>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="gameboard bg-white">
+                <div class="col-4 offset-4">
+                    <table id="gamesurface" class="gamesurface"
+                        data-game-winner="{{winner}}"
+                        data-game-status="{{current_game_status}}"
+                        data-game-id="{{current_game_id}}"
+                        data-current-move="{{next_move}}" data-current-moves="{{moves}}">
+                      <tr>
+                        <td id="location1"></td>
+                        <td id="location2" class="vertial-border"></td>
+                        <td id="location3"></td>
+                      </tr>
+                      <tr>
+                        <td id="location4" class="horizontal-border"></td>
+                        <td id="location5" class="vertial-border horizontal-border"></td>
+                        <td id="location6" class="horizontal-border"></td>
+                      </tr>
+                      <tr>
+                        <td id="location7"></td>
+                        <td id="location8" class="vertial-border"></td>
+                        <td id="location9"></td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% include 'footer.html' %}

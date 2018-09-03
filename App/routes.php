@@ -3,6 +3,7 @@ use Respect\Validation\Validator as v;
 
 //entry point setup a new game.
 $app->get('/', 'HomeController:index')->setName('home');
+$app->get('/{session_url}', 'SessionController:index')->setName('gameBoard');
 
 
 //new game route and validation.
@@ -16,8 +17,18 @@ $app->post('/startnewgame', 'HomeController:startnewgame')
   ->setName('startnewgame')
   ->add(new \DavidePastore\Slim\Validation\Validation($newGameValidator));
 
-/**
-* main game board - this will show the game reteaive the current game and let
-* JS take over sending and receiving updates from the ajax calls.
-*/
-$app->get('/{session_id}', 'SessionController:index')->setName('gameBoard');
+$app->get('/getgamestats/{session_url}', 'GameController:getGameStats')
+    ->setName('getgamestats');
+
+$game_id = v::intVal()->setName('Game ID');
+$location = v::stringType()->min(9)->max(9)->setName('Location ID');
+$player_id = v::intVal()->setName('Player ID');
+$player_value = v::stringType()->setName('Player Value');
+$newMoveValidator = array(
+  'game_id' => $playerOneValidator,
+  'location' => $playerTwoValidator,
+  'player_id' => $player_id,
+  'player_value' => $player_value
+ );
+$app->post('/game/saveMove', 'GameController:saveMove')->setName('SaveMove')
+    ->add(new \DavidePastore\Slim\Validation\Validation($newMoveValidator));
