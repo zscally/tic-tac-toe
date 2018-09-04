@@ -26,9 +26,10 @@ $(function(){
     };
 
     checkGame(players, winner, current_game_status);
-    applyCurrnetMoves(current_moves);
     setCurrentMove(players, current_move);
-
+    setWhosTurn(players);
+    applyCurrnetMoves(players, current_moves);
+    
     $('#gamesurface').on('click', 'td', function(){
         if( $('#gamesurface').data('game-status') == 'Complete' )
             return;
@@ -44,6 +45,14 @@ $(function(){
             saveMove(game_id, location, player.player_id, player.player_value, current_game_status, board_locked);
         }
     });
+
+    function setWhosTurn(players) {
+        $.each(players, function(player_id, player) {
+            if( player.current_move == true ) {
+                $('#current_move').html(player.player_value);
+            }
+        });
+    }
 
     function checkGame(players, winner, current_game_status) {
         if( winner ) {
@@ -65,9 +74,18 @@ $(function(){
             $('#newGameButton').show();
     }
 
-    function applyCurrnetMoves(moves) {
+    function applyCurrnetMoves(players, moves) {
+        var total_moves = JSON.parse(moves).length;
         $.each(JSON.parse(moves), function(i, move) {
             $('#' + move.location).html(move.player_value);
+            if (i === (total_moves - 1)) {
+                var setmove = 'X';
+                if(move.player_value == 'X') {
+                    setmove = 'O';
+                }
+                $('#gamesurface').data('current_move', setmove);
+                setNextPlayer(players);
+            }
         });
     }
 
@@ -144,6 +162,7 @@ $(function(){
     }
 
     function setNextPlayer(players) {
+        console.log(players);
         $.each(players, function(player_id, player) {
             if( player.current_move == true )
             {
@@ -152,6 +171,7 @@ $(function(){
                 player.current_move = true;
             }
         });
+        setWhosTurn(players);
     }
 
     function setCurrentMove(players, current_move) {
@@ -159,6 +179,8 @@ $(function(){
             if( current_move == player.player_id )
             {
                 players[player_id].current_move = true;
+            } else {
+                players[player_id].current_move = false;
             }
         });
     }

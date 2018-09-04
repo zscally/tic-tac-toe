@@ -21,7 +21,7 @@ Source [Wiki](https://en.wikipedia.org/wiki/Tic-tac-toe)
 - If the browser is closed, we can reopen it and resume playing where we left off (including game state, player names, and scores).
 
 ## Installation
-### Please make sure [Comoser](https://getcomposer.org/download/) and [npm](https://nodejs.org/en/) are installed.
+### Please make sure [Composer](https://getcomposer.org/download/) and [npm](https://nodejs.org/en/) are installed.
  - sh build.sh (this will fetch and build all the require libs)
  - run "mysql tictactoe < schema.sql" granted you have mysql permissions.
  - modify bootstrap/config.php to meet your database settings.
