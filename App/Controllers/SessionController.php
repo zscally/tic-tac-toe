@@ -44,6 +44,7 @@ class SessionController extends Controller
         //figure out whos move it is.
         $next_move = $this->move->getNextMove($current_game->id);
         $args = [
+            'session_url' => $session_url,
             'current_game_status' => $current_game->status,
             'winner' => $current_game->winner,
             'current_game_id' => $current_game->id,

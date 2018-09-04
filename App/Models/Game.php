@@ -15,12 +15,13 @@ class Game extends Model
       */
       public function createGame($session_id, $players)
       {
-          $first_player = array_rand($players);
+          $first_player = array_rand([0, 1]);
           $game = $this->create([
               'session_id' => $session_id,
               'player_one_id' => $players[0]->id,
               'player_two_id' => $players[1]->id,
               'first_move' => $players[$first_player]->id,
+              'winner' => null,
               'status' => 'New'
           ]);
 

@@ -27,4 +27,9 @@ class Player extends Model
           return $player[0];
       }
 
+      public function getPlayersByList($player_id_list)
+      {
+         return $this->whereIn('id', $player_id_list)->get();
+      }
+
 }

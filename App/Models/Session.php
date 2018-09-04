@@ -19,6 +19,11 @@ class Session extends Model
           return $session;
       }
 
+      public function getSessionFromSessionUrl($sesion_url)
+      {
+          return $this->where('session_url', $session_url)->first();
+      }
+
       public function getSessionIdFromUrl($session_url)
       {
           return $this->where('session_url', $session_url)->pluck('id')->all();

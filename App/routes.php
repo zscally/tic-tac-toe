@@ -32,3 +32,5 @@ $newMoveValidator = array(
  );
 $app->post('/game/saveMove', 'GameController:saveMove')->setName('SaveMove')
     ->add(new \DavidePastore\Slim\Validation\Validation($newMoveValidator));
+
+$app->get('/game/newGame/{session_url}', 'GameController:newGame')->setName('newGame');

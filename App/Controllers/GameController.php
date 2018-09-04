@@ -31,6 +31,21 @@ class GameController extends Controller
             ->write($body);
     }
 
+    public function newGame($request, $response, $args)
+    {
+        $session_url = $args['session_url'];
+        $session = $this->session->getSessionIdFromUrl($session_url);
+        $current_game = $this->game->getCurrentGameBySessionId($session[0]);
+        if($current_game->status == 'Complete') {
+            $players = $this->player->getPlayersByList([$current_game->player_one_id, $current_game->player_two_id]);
+            $game = $this->game->createGame($session[0], $players);
+            $this->flash->addMessage('success', [['New game has been created!']]);
+        } else {
+            $this->flash->addMessage('error', [['Please finish current game before starting a new one!']]);
+        }
+        return $response->withRedirect('/' . $session_url);
+    }
+
     public function gameStats($session_url)
     {
         //get the session id from URL
