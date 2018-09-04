@@ -23,8 +23,13 @@ class SessionController extends Controller
     }
 
     /**
-    * Display play for accepting two players and forward them to start a new game.
-    */
+     * Display play for accepting two players and forward them to start a new game.
+     *
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
     public function index($request, $response, $args)
     {
         $messages = $this->flash->getMessages();

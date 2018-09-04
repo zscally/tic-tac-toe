@@ -24,8 +24,13 @@ class HomeController extends Controller
     }
 
     /**
-    * Display play for accepting two players and forward them to start a new game.
-    */
+     * Display play for accepting two players and forward them to start a new game.
+     *
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
     public function index($request, $response, $args)
     {
         $args['page_title'] = 'Tic Tac Toe';
@@ -37,9 +42,13 @@ class HomeController extends Controller
     }
 
     /**
-    * Starts a new session, allowing for multible games to be played within the
-    * session.
-    */
+     * Starts a new session, allowing for multible games to be played within the session.
+     *
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
     public function startnewgame($request, $response, $args)
     {
         if( $request->getAttribute('has_errors') )

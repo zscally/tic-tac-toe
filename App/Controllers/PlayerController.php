@@ -22,8 +22,4 @@ class PlayerController extends Controller
         $this->player = new \App\Models\Player();
         $this->move = new \App\Models\Move();
     }
-
-    public function getGameMoves($request, $response, $args)
-    {
-        return $this->player->getMovesByGameId($game_id);
-    }
+}

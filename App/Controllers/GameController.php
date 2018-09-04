@@ -21,6 +21,14 @@ class GameController extends Controller
         $this->move = new \App\Models\Move();
     }
 
+    /**
+     * request componet to returns a json object of a given game stats based on the session url.
+     *
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
     public function getGameStats($request, $response, $args)
     {
         $session_url = $args['session_url'];
@@ -31,6 +39,15 @@ class GameController extends Controller
             ->write($body);
     }
 
+    /**
+     * Starts a new game
+     *
+     *
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
     public function newGame($request, $response, $args)
     {
         $session_url = $args['session_url'];
@@ -46,6 +63,12 @@ class GameController extends Controller
         return $response->withRedirect('/' . $session_url);
     }
 
+    /**
+     * returns an array of game stats based on session url.
+     *
+     * @param $session_url
+     * @return array
+     */
     public function gameStats($session_url)
     {
         //get the session id from URL
@@ -74,6 +97,14 @@ class GameController extends Controller
         return $game_arr;
     }
 
+    /**
+     * Saves a given move to that database, also checks for a winner.
+     *
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
     public function saveMove($request, $response, $args) {
         if( $request->getAttribute('has_errors') )
         {
@@ -91,7 +122,7 @@ class GameController extends Controller
         $game = $this->game->getGameById($post['game_id']);
         //now get moves and calculate if we have a winner!
         $moves = $this->move->getMovesByGameId($post['game_id']);
-        $winner = $this->checkforWinner($moves);
+        $winner = $this->checkForWinner($moves);
         $winning_player = null;
         $game_status = 'New';
 
@@ -123,7 +154,13 @@ class GameController extends Controller
             ->write($body);
     }
 
-    private function checkforWinner($moves) {
+    /**
+     * This method checks for a winner.
+     *
+     * @param $moves
+     * @return bool|mixed|null|string
+     */
+    private function checkForWinner($moves) {
         $winner = null;
         $player_one = null;
         $player_two = null;

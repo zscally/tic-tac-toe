@@ -6,30 +6,48 @@ use Illuminate\Database\Query\Builder;
 
 class Player extends Model
 {
-      protected $table = 'players';
-      protected $fillable = ['player_name'];
+    protected $table = 'players';
+    protected $fillable = ['player_name'];
 
-      public function createPlayers($player_list)
+    /**
+     * Creates a player
+     *
+     * @param $player_list
+     * @return array
+     */
+    public function createPlayers($player_list)
+    {
+      $players = [];
+      foreach( $player_list as $player )
       {
-          $players = [];
-          foreach( $player_list as $player )
-          {
-              $players[] = $this->create([
-                  'player_name' => $player
-              ]);
-          }
-          return $players;
+          $players[] = $this->create([
+              'player_name' => $player
+          ]);
       }
+      return $players;
+    }
 
-      public function getPlayerNameById($id)
-      {
-          $player = $this->where('id', $id)->pluck('player_name')->all();
-          return $player[0];
-      }
+    /**
+     * Gets a player by ID
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getPlayerNameById($id)
+    {
+      $player = $this->where('id', $id)->pluck('player_name')->all();
+      return $player[0];
+    }
 
-      public function getPlayersByList($player_id_list)
-      {
-         return $this->whereIn('id', $player_id_list)->get();
-      }
+    /**
+     * gets a player by an array of players
+     *
+     * @param $player_id_list
+     * @return mixed
+     */
+    public function getPlayersByList($player_id_list)
+    {
+     return $this->whereIn('id', $player_id_list)->get();
+    }
 
 }
