@@ -1,7 +1,7 @@
 # Tic Tac Toe, A simple Game.
 This is a simple tic tac toe game.
 
-##DEMO:
+## Demo
 [tictactoe.2dq.us](http://tictactoe.2dq.us)
 
 ## Tic Tac Toe
