@@ -34,7 +34,7 @@ CREATE TABLE `games` (
   KEY `session_id` (`session_id`),
   KEY `player_one_id` (`player_one_id`),
   KEY `player_two_id` (`player_two_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `moves` */
 
@@ -51,7 +51,7 @@ CREATE TABLE `moves` (
   PRIMARY KEY (`id`),
   KEY `game_id` (`game_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=544 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `players` */
 
@@ -63,7 +63,7 @@ CREATE TABLE `players` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `sessions` */
 
@@ -78,7 +78,7 @@ CREATE TABLE `sessions` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `session_url` (`session_url`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
