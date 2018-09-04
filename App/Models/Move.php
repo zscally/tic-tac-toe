@@ -43,14 +43,14 @@ class Move extends Model
      * @param $game_id
      * @return null
      */
-    public function getNextMove($game_id) {
-      //get current moves
-      $moves = $this->getMovesByGameId($game_id);
-      if( count($moves) == 0 )
-      {
-          return null;
-      } else {
-          return $this->where('game_id', $game_id)->orderBy('created_at', 'desc')->first();
-      }
-}
+    public function getNextMove($game_id)
+    {
+        //get current moves
+        $moves = $this->getMovesByGameId($game_id);
+        if (count($moves) == 0) {
+            return null;
+        } else {
+            return $this->where('game_id', $game_id)->orderBy('created_at', 'desc')->first();
+        }
+    }
 }
