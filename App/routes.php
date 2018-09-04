@@ -7,8 +7,8 @@ $app->get('/{session_url}', 'SessionController:index')->setName('gameBoard');
 
 
 //new game route and validation.
-$playerOneValidator = v::alnum()->length(1, 25)->setName('Player one\'s name');
-$playerTwoValidator = v::alnum()->length(1, 25)->setName('Player two\'s name');
+$playerOneValidator = v::alnum()->length(1, 25)->noWhitespace()->setName('Player one\'s name');
+$playerTwoValidator = v::alnum()->length(1, 25)->noWhitespace()->setName('Player two\'s name');
 $newGameValidator = array(
   'playerOne' => $playerOneValidator,
   'playerTwo' => $playerTwoValidator
@@ -21,7 +21,7 @@ $app->get('/getgamestats/{session_url}', 'GameController:getGameStats')
     ->setName('getgamestats');
 
 $game_id = v::intVal()->setName('Game ID');
-$location = v::stringType()->min(9)->max(9)->setName('Location ID');
+$location = v::stringType()->min(9)->max(9)->noWhitespace()->setName('Location ID');
 $player_id = v::intVal()->setName('Player ID');
 $player_value = v::stringType()->setName('Player Value');
 $newMoveValidator = array(
